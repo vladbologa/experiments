@@ -1,24 +1,24 @@
 #include "CommandSequence.h"
 
-#include "commands/Composite.h"
 #include "commands/Command.h"
+#include "commands/Composite.h"
 
 void CommandSequence::add(commands::Command&& command)
 {
     command.execute();
-    m_redoCommands.clear();
-    m_uncommitedCommands.emplace_back(std::move(command));
+    redoCommands_.clear();
+    uncommitedCommands_.emplace_back(std::move(command));
 }
 
 void CommandSequence::commit()
 {
-    if (!m_uncommitedCommands.empty()) {
-        if (m_uncommitedCommands.size() == 1) {
-            m_commands.emplace_back(std::move(m_uncommitedCommands.back()));
+    if (!uncommitedCommands_.empty()) {
+        if (uncommitedCommands_.size() == 1) {
+            commands_.emplace_back(std::move(uncommitedCommands_.back()));
         } else {
-            m_commands.emplace_back(commands::Composite(std::move(m_uncommitedCommands)));
+            commands_.emplace_back(commands::Composite(std::move(uncommitedCommands_)));
         }
-        m_uncommitedCommands.clear();
+        uncommitedCommands_.clear();
     }
 }
 
@@ -26,27 +26,27 @@ void CommandSequence::undo()
 {
     commit();
     if (canUndo()) {
-        m_commands.back().undo();
-        m_redoCommands.emplace_back(std::move(m_commands.back()));
-        m_commands.pop_back();
+        commands_.back().undo();
+        redoCommands_.emplace_back(std::move(commands_.back()));
+        commands_.pop_back();
     }
 }
 
 bool CommandSequence::canUndo() const noexcept
 {
-    return !(m_uncommitedCommands.empty() && m_commands.empty());
+    return !(uncommitedCommands_.empty() && commands_.empty());
 }
 
 void CommandSequence::redo()
 {
     if (canRedo()) {
-        m_redoCommands.back().execute();
-        m_commands.emplace_back(std::move(m_redoCommands.back()));
-        m_redoCommands.pop_back();
+        redoCommands_.back().execute();
+        commands_.emplace_back(std::move(redoCommands_.back()));
+        redoCommands_.pop_back();
     }
 }
 
 bool CommandSequence::canRedo() const noexcept
 {
-    return !m_redoCommands.empty();
+    return !redoCommands_.empty();
 }

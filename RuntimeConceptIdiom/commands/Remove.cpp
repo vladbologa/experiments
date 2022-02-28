@@ -3,20 +3,20 @@
 namespace commands {
 
 Remove::Remove(const DrawableObject& drawableObject, const InserterFunc& inserter, const RemoverFunc& remover)
-    : m_drawableObject(drawableObject)
-    , m_inserter(inserter)
-    , m_remover(remover)
+    : drawableObject_(drawableObject)
+    , inserter_(inserter)
+    , remover_(remover)
 {
 }
 
 void Remove::execute() const
 {
-    m_remover(m_drawableObject.getId());
+    remover_(drawableObject_.getId());
 }
 
 void Remove::undo() const
 {
-    m_inserter(m_drawableObject);
+    inserter_(drawableObject_);
 }
 
 } // namespace commands

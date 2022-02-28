@@ -21,9 +21,9 @@ public:
     void undo() const;
 
 private:
-    DrawableObject m_drawableObject;
-    InserterFunc m_inserter;
-    RemoverFunc m_remover;
+    DrawableObject drawableObject_;
+    InserterFunc inserter_;
+    RemoverFunc remover_;
 };
 
 } // namespace commands

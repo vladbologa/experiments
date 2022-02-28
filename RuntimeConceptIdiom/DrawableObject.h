@@ -20,6 +20,6 @@ public:
     void draw() const { }
 
 private:
-    Id m_id;
-    Position m_position;
+    Id id_;
+    Position position_;
 };

@@ -3,7 +3,7 @@
 namespace commands {
 
 Move::Move(const Id& id, const Position& position, const GetterFunc& getterFunc)
-    : m_id(id)
+    : id_(id)
     , m_newPosition(position)
     , m_drawableObjectGetter(getterFunc)
 {
@@ -11,7 +11,7 @@ Move::Move(const Id& id, const Position& position, const GetterFunc& getterFunc)
 }
 
 Move::Move(const Id& id, const Position& oldPosition, const Position& newPosition, const GetterFunc& getterFunc)
-    : m_id(id)
+    : id_(id)
     , m_oldPosition(oldPosition)
     , m_newPosition(newPosition)
     , m_drawableObjectGetter(getterFunc)
@@ -20,12 +20,12 @@ Move::Move(const Id& id, const Position& oldPosition, const Position& newPositio
 
 void Move::execute() const
 {
-    m_drawableObjectGetter(m_id).setPosition(m_newPosition);
+    m_drawableObjectGetter(id_).setPosition(m_newPosition);
 }
 
 void Move::undo() const
 {
-    m_drawableObjectGetter(m_id).setPosition(m_oldPosition);
+    m_drawableObjectGetter(id_).setPosition(m_oldPosition);
 }
 
 } // namespace commands

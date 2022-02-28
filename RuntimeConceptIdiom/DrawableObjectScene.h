@@ -25,7 +25,7 @@ public:
 
     // Adds a new object
     void add(const DrawableObject& object);
-    
+
     // Removes the object with the given id
     void remove(const Id& id);
 
@@ -44,10 +44,10 @@ public:
     const DrawableObject& getDrawableObject(const Id& id) const;
 
 private:
-    std::unordered_map<Id, DrawableObject> m_drawableObjects;
-    CommandSequence m_commandSequence;
+    std::unordered_map<Id, DrawableObject> drawableObjects_;
+    CommandSequence commandSequence_;
 
-    InserterFunc m_dawableObjectsInserter;
-    RemoverFunc m_drawableObjectsRemover;
-    std::optional<Id> m_lastChangePositionId;
+    InserterFunc dawableObjectsInserter_;
+    RemoverFunc drawableObjectsRemover_;
+    std::optional<Id> lastChangePositionId_;
 };

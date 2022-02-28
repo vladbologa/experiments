@@ -18,9 +18,9 @@ public:
     void undo() const;
 
 private:
-    DrawableObject m_drawableObject; //< stores a copy of the object, to be able to recreate it, if needed
-    InserterFunc m_inserter;
-    RemoverFunc m_remover;
+    DrawableObject drawableObject_; //< stores a copy of the object, to be able to recreate it, if needed
+    InserterFunc inserter_;
+    RemoverFunc remover_;
 };
 
 } // namespace commands

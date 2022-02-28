@@ -1,8 +1,8 @@
 #pragma once
 
 #include "DrawableObject.h"
-#include "commands/Common.h"
 #include "commands/Command.h"
+#include "commands/Common.h"
 
 #include <memory>
 #include <vector>
@@ -37,7 +37,7 @@ public:
     bool canRedo() const noexcept;
 
 private:
-    Commands m_uncommitedCommands;
-    Commands m_commands;
-    Commands m_redoCommands;
+    Commands uncommitedCommands_;
+    Commands commands_;
+    Commands redoCommands_;
 };

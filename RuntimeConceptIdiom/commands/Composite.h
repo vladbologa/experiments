@@ -18,7 +18,7 @@ public:
     void undo() const;
 
 private:
-    std::vector<Command> m_commands;
+    std::vector<Command> commands_;
 };
 
 } // namespace commands

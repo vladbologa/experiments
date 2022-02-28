@@ -23,7 +23,7 @@ public:
     void undo() const;
 
 private:
-    Id m_id;
+    Id id_;
     Position m_newPosition;
     Position m_oldPosition;
     GetterFunc m_drawableObjectGetter;
