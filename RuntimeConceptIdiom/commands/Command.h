@@ -4,6 +4,8 @@
 
 namespace commands {
 
+// Concept that must be implemented by the types that
+// are used together with the Command class
 template <typename T>
 concept CommandConcept = requires(T c)
 {
@@ -16,12 +18,15 @@ concept CommandConcept = requires(T c)
  *
  * Uses the runtime concept idiom to implement the command
  * design pattern
+ *
+ * Types passed to the constructor of Command *must* implement
+ * the CommandConcept defined above.
  */
 class Command {
 public:
     template <typename T>
     Command(T x)
-        : self_(std::make_unique<Model<T>>(std::move(x)))
+        : self_(std::make_unique<CommandWrapper<T>>(std::move(x)))
     {
     }
 
@@ -46,8 +51,8 @@ private:
     };
 
     template <CommandConcept T>
-    struct Model final : ConceptT {
-        Model(T x)
+    struct CommandWrapper final : ConceptT {
+        CommandWrapper(T x)
             : command_(std::move(x))
         {
         }

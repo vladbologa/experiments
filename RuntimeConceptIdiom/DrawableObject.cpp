@@ -1,10 +1,5 @@
 #include "DrawableObject.h"
 
-DrawableObject::DrawableObject()
-    : id_ {}
-{
-}
-
 DrawableObject::DrawableObject(const Id& id, const Position& position)
     : id_(id)
     , position_(position)

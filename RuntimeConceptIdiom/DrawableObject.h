@@ -8,7 +8,6 @@
  */
 class DrawableObject {
 public:
-    DrawableObject();
     DrawableObject(const Id& id, const Position& position);
 
     void setPosition(const Position& position);
