@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package ="vlad/grpc_test";
+
+package grpc_test;
+
+service Ping {
+    rpc Send (PingRequest) returns (PingResponse);
+}
+
+message PingRequest {
+    string name = 1;
+}
+
+message PingResponse {
+    string message = 1;
+}
