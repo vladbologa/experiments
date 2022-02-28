@@ -1,4 +1,4 @@
-#Runtime Concept Idiom
+# Runtime Concept Idiom example
 
 This project implements the Runtime Concept Idiom, described by Sean Parent in
 [this talk](https://www.youtube.com/watch?v=QGcVXgEVMJg), in the context of the
